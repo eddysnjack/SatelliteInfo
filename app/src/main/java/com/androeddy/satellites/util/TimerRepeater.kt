@@ -27,9 +27,7 @@ abstract class TimerRepeater(private val delayMs: Long) {
     }
 
     fun startTimer() {
-        Log.d("TIMER", "startTimer: Before isRunningCheck:$isRunning")
         if (isRunning) return
-        Log.d("TIMER", "startTimer: After isRunningCheck:$isRunning")
         runnable?.let {
             customHandler?.postDelayed(runnable!!, delayMs)
             isRunning = true
@@ -37,9 +35,7 @@ abstract class TimerRepeater(private val delayMs: Long) {
     }
 
     fun stopTimer() {
-        Log.d("TIMER", "stopTimer: begin isRunning:$isRunning")
         customHandler?.removeCallbacksAndMessages(null)
         isRunning = false
-        Log.d("TIMER", "stopTimer: end isRunning:$isRunning")
     }
 }

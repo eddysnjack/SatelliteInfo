@@ -44,7 +44,6 @@ object AppModules {
 
         if (BuildConfig.DEBUG) {
             db.setQueryCallback(RoomDatabase.QueryCallback { sqlQuery: String, bindArgs: List<Any?> ->
-                Log.d("ROOM QUERY", "query:$sqlQuery - params:${bindArgs}")
             }, Executors.newSingleThreadExecutor())
         }
 

@@ -27,7 +27,6 @@ class MainFR : BaseFragment<FrMainBinding, MainFRVM>(FrMainBinding::inflate, Mai
 
     private val timerCountDown = object : TimerCountDown<String>(500) {
         override fun onTrigger(triggerMessage: String?) {
-            Log.d(MainFR::class.java.simpleName, "onTrigger: triggerMessage:$triggerMessage")
             if ((triggerMessage?.trim()).isNullOrEmpty().not()) {
                 viewModel.getList(triggerMessage)
             } else {
@@ -53,14 +52,12 @@ class MainFR : BaseFragment<FrMainBinding, MainFRVM>(FrMainBinding::inflate, Mai
         binding.rvSatellites.addItemDecoration(decoration)
         binding.svSatellites.setOnQueryTextListener(object : OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Log.d("SEARCH", "onQueryTextSubmit: $query")
                 viewModel.getList(query)
                 timerCountDown.stop()
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                Log.d("SEARCH", "onQueryTextChange: $newText")
                 timerCountDown.restart(newText)
                 return false
             }
@@ -82,13 +79,11 @@ class MainFR : BaseFragment<FrMainBinding, MainFRVM>(FrMainBinding::inflate, Mai
             }
 
             binding.rvSatellites.adapter = adapter
-            Log.d(MainFR::class.java.simpleName, "observe: onSuccess called")
         }
 
         viewModel.onError.observe(this@MainFR) {
             binding.groupSuccessItems.gone()
             binding.tvErrorDescription.visible()
-            Log.d(MainFR::class.java.simpleName, "setReceivers: onError Called")
         }
     }
 

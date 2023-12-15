@@ -9,7 +9,6 @@ import io.reactivex.rxjava3.core.Single
 class JsonDataServiceImp : JsonDataServiceSkeleton {
     override fun <T : Any> getData(fileName: String, context: Context, typeToken:TypeToken<T>): Single<T> {
         return Single.create<T> { emitter ->
-            Log.d("JsonDataServiceImp", "getData: ${Thread.currentThread()}")
             val result = JsonDataFetchTask.getJsonData(fileName, context)
             if (result.first) {
                 val strResult = result.second
