@@ -26,8 +26,8 @@ misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
 
-# Keystore files
-*.jks
+# Keystore files (opting out jks since we dont planning to upload to google play)
+#*.jks
 *.keystore
 
 # Google Services (e.g. APIs or Firebase)
