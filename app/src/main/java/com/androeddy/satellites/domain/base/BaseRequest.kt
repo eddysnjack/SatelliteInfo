@@ -1,5 +1,5 @@
 package com.androeddy.satellites.domain.base
 
-class BaseRequest {
+open class BaseRequest {
     var endPoint: String? = null
 }

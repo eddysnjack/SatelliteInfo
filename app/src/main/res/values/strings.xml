@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Satellite Info</string>
+
+
+    <string name="general_loading">Loading...Please Wait</string>
+    <!-- MAIN SCREEN -->
+    <string name="satellite_main_error_description">Something Unexpected Happen. Couldn\'t Fetch The Data.</string>
+    <!-- DETAIL SCREEN -->
+    <string name="satellite_detail_height_mass_label">Height/Mass:</string>
+    <string name="satellite_detail_cost_label">Cost:</string>
+    <string name="satellite_detail_last_position_label">Last Position:</string>
+    <string name="satellite_detail_last_position_error">Sorry couldn\'t fetch position data :/</string>
+    <string name="satellite_detail_error_description">@string/satellite_main_error_description</string>
 </resources>

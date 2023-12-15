@@ -1,10 +1,8 @@
 package com.androeddy.satellites.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.androeddy.satellites.domain.base.BaseRequest
-import com.androeddy.satellites.domain.models.SatellitesBasicEntity
+import com.androeddy.satellites.R
 import com.androeddy.satellites.domain.usecases.GetSatelliteListUseCase
 import com.androeddy.satellites.ui.base.BaseViewModel
 import com.androeddy.satellites.ui.main.models.SatelliteUIModel
@@ -19,27 +17,25 @@ class MainFRVM @Inject constructor(
     val onSatelliteListFetched = MutableLiveData<ArrayList<SatelliteUIModel>>()
     val onError = MutableLiveData<Unit>()
 
-    companion object {
-        const val TAG = "TAGEDDY"
-    }
-
     override fun onViewCreated(savedInstanceState: Bundle?) {
         super.onViewCreated(savedInstanceState)
         getList()
     }
 
-    fun getList() {
+    fun getList(query: String? = null) {
         getSatellites.execute(
-            params = BaseRequest().apply { endPoint = "satellite-list.json" },
+            params = query?.let { GetSatelliteListUseCase.Params(it) },
             onSuccess = { list ->
                 val transformedList: ArrayList<SatelliteUIModel> = ArrayList(
                     list.map { item -> SatelliteUIModel().mapFromBasic(item) }
                 )
                 onSatelliteListFetched.postValue(transformedList)
-                Log.d(TAG, "onViewCreated: onSatelliteListFetched called")
             },
             onError = {
                 onError.postValue(Unit)
-            })
+            },
+            uiActionsMessenger,
+            stringResources?.getStringResource(R.string.general_loading)
+        )
     }
 }
